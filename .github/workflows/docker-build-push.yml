@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "ZeeshanIB-patch-2" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "ZeeshanIB-patch-2" ]
+    branches: [ "main" ]
 
 jobs:
 
