@@ -18,4 +18,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file web-app-docker/Dockerfile --tag zeeshanib/webapp-docker:$(date +%s) 
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/webapp-docker:1.0
+      run: docker push ${{secrets.DOCKER_USER}}/webapp-docker:$(date +%s)
