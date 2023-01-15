@@ -3,11 +3,13 @@ on:
   push:
     branches: [ "main" ]
     paths:
-    - web-app-docker/**
+    - "web-app-docker/**"
+    - "!voting-app docker compose/**"
   pull_request:
     branches: [ "main" ]
     paths:
-    - web-app-docker/**
+    - "web-app-docker/**"
+    - "!voting-app docker compose/**"
 jobs:
   build:
     runs-on: ubuntu-latest
