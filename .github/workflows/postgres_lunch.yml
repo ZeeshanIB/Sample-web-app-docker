@@ -16,6 +16,6 @@ jobs:
         
       - name: Launch Postgres container
         run: |
-          docker run -d --name my-postgres -e POSTGRES_USER: "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
+          docker run -d --name my-postgres -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
 
         
