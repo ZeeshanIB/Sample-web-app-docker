@@ -2,14 +2,12 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-    paths:
+    paths-ignore:
     - "web-app-docker/**"
-    - "!voting-app docker compose/**"
   pull_request:
     branches: [ "main" ]
-    paths:
+    paths-ignore:
     - "web-app-docker/**"
-    - "!voting-app docker compose/**"
 jobs:
   build:
     runs-on: ubuntu-latest
