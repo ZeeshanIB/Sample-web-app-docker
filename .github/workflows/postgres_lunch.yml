@@ -16,5 +16,5 @@ jobs:
         
       - name: Launch Postgres container
         run: |
-          docker run -d --name my-postgres -e POSTGRES_USER= zeeshan -e POSTGRES_PASSWORD= helloword -e POSTGRES_DB= app_table postgres:latest 
+          docker run -d --name my-postgres -e POSTGRES_PASSWORD= helloword -e POSTGRES_DB= app_table postgres:latest 
         
