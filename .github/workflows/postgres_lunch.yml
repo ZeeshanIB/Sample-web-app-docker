@@ -1,0 +1,19 @@
+name: deploy
+on:
+  push:
+    branches:
+        - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Launch Postgres container
+        run: |
+        docker run -d --name my-postgres -e POSTGRES_USER= 
