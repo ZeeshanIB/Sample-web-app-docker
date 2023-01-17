@@ -1,6 +1,6 @@
-FROM python:3.12.0a3-slim-bullseye
+FROM python:3.8.3-slim-buster
 RUN apt-get update 
-RUN apt-get install -y python3-psycopg2
+RUN pip install psycopg2-binary
 RUN pip install flask
 RUN groupadd -g 999 webuser && \
     useradd -r -u 999 -g webuser webuser
