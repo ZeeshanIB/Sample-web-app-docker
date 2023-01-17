@@ -1,15 +1,28 @@
-
 import os
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 
-@app.route("/")
-def main():
-    return "Welcome!"
+app = Flask(_name_)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@host:port/dbname'
+db = SQLAlchemy(app)
 
-@app.route('/how are you')
-def hello():
-    return 'I am good, how about you?'
+class Connection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(255))
 
-if __name__ == "__main__":
+@app.route('/')
+def index():
+    ip = request.remote_addr
+    connection = Connection(ip_address=ip)
+    db.session.add(connection)
+    db.session.commit()
+    return 'IP address saved: {}'.format(ip)
+
+if _name_ == '_main_':
     app.run(host="0.0.0.0", port=8080)
+
+
+
+
+
+
