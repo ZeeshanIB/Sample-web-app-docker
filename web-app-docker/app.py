@@ -7,11 +7,11 @@ app = Flask(__name__)
 def index():
     # Connect to the Postgres container
     conn = connect(
-        host="172.17.0.2",
+        host="a",
         port=5432,
-        user="postgres",
-        password="postgres",
-        dbname="postgres"
+        user="b",
+        password="c",
+        dbname="d"
     )
 
     # Create the table to store IP addresses
