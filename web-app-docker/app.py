@@ -24,7 +24,7 @@ def index():
 
     conn.commit()
     conn.close()
-
+    print ("IP address stored!")
     return "IP address stored!"
 
 if __name__ == '_main_':
