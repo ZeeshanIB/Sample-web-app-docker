@@ -1,13 +1,10 @@
-name: Docker Image CI
+name: docker reusable workflow
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-    - "web-app-docker/**"
-  pull_request:
-    branches: [ "main" ]
-    paths:
-    - "web-app-docker/**"
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
