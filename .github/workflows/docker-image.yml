@@ -8,16 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Dispatch event
-      uses: actions/github-script@0.9.1
-      with:
-        script: |
-          github.repos.createDispatchEvent({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            event_type: "run-build-reusable",
-            client_payload: {
-              "foo": "bar"
-            }
-          });
+      uses: ./.github/workflows/build-reusable.yml
 
     
