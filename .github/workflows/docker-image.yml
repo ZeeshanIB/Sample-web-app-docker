@@ -32,7 +32,7 @@ jobs:
         
       - name: Launch Postgres container
         run: |
-          docker run -d --name postgres -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
+          docker run -d --name postgres_db -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
@@ -45,7 +45,8 @@ jobs:
       - name: Launch Web App container
         run: |
           docker start postgres |
-          docker run -d --name web --link postgres:postgres -p 8000:8000 -e host= ${host} -e port= ${port} -e password= ${password} -e dbname= ${dbname} ${{secrets.DOCKER_USER}}/webapp-docker:v2
+          echo " connected " |
+          docker run -d --name web --link postgres_db:db -p 8000:8000 -e host= ${host} -e port= ${port} -e password= ${password} -e dbname= ${dbname} ${{secrets.DOCKER_USER}}/webapp-docker:v2
 
       - name: echo
         run: echo " connected "
