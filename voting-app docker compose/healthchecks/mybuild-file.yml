@@ -1,0 +1,55 @@
+name: reusable workflow
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: updating db connection
+      run: |
+        echo host=${host}, user=${user}, password=${password}, dbname=${dbname} >> app.py
+    - name: docker login
+      env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build . --file web-app-docker/Dockerfile --tag zeeshanib/webapp-docker:v2
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKER_USER}}/webapp-docker:v2
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Launch Postgres container
+        run: |
+          docker run -d --name postgres_db -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
+        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          host : postgres
+          port : 5432
+          user : postgres
+          password : postgres
+          dbname : postgres
+      - name: start
+        run: |
+          docker start postgres_db
+      - name: Launch Web App container
+        run: |
+          docker ps 
+
+      - name: Launch Web App container
+        run: |
+          docker run -d --name webapp ${{secrets.DOCKER_USER}}/webapp-docker:v2
+
+    
