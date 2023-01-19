@@ -1,5 +1,13 @@
 name: reusable workflow
-
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - "web-app-docker/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+    - "web-app-docker/**"
 jobs:
   build:
     runs-on: ubuntu-latest

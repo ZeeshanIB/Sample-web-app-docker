@@ -1,3 +1,4 @@
+name: Dispatch
 on:
   repository_dispatch:
     types: [run-build-reusable]
