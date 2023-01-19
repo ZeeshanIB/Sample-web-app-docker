@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: updating db connection
+      run: |
+        echo host=${host}, user=${user}, password=${password}, dbname=${dbname} >> app.py
     - name: docker login
       env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -44,13 +47,13 @@ jobs:
       - name: start
         run: |
           docker start postgres_db
-      - name: container
+      - name: Launch Web App container
         run: |
           docker ps 
 
       - name: Launch Web App container
         run: |
-          docker run -d --name web --link postgres_db:db -e host= ${host} -e port= ${port} -e password= ${password} -e dbname= ${dbname} ${{secrets.DOCKER_USER}}/webapp-docker:v2
+          docker run --name webapp ${{secrets.DOCKER_USER}}/webapp-docker:v2
 
       - name: echo
         run: echo " connected "

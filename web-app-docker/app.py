@@ -3,15 +3,20 @@ from psycopg2 import connect
 
 app = Flask(__name__)
 
+port=5432,
+host="hostname",
+user="username",
+password="password",
+dbname="database_name"
 @app.route('/')
 def index():
     # Connect to the Postgres container
     conn = connect(
-        host="a",
-        port=5432,
-        user="b",
-        password="c",
-        dbname="d"
+        port,
+        host,
+        user,
+        password,
+        dbname
     )
 
     # Create the table to store IP addresses
