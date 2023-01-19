@@ -44,6 +44,7 @@ jobs:
 
       - name: Launch Web App container
         run: |
+          docker start postgres |
           docker run -d --name web --link postgres:postgres -p 8000:8000 -e host= ${host} -e port= ${port} -e password= ${password} -e dbname= ${dbname} ${{secrets.DOCKER_USER}}/webapp-docker:v2
 
       - name: echo
