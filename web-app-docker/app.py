@@ -24,8 +24,21 @@ def index():
 
     conn.commit()
     conn.close()
-    print ("IP address stored!")
     return "IP address stored!"
+@app.route('/print-table')
+def print_table():
+    conn = connect(
+        host="hostname",
+        user="username",
+        password="password",
+        dbname="database_name"
+    )
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM ip_addresses")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+    return "Table printed to console"
 
 if __name__ == '_main_':
     app.run(debug=True, host='0.0.0.0',port=8080)
