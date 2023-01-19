@@ -3,7 +3,9 @@ on:
   workflow_dispatch:
 jobs:
   call-workflow-in-local-repo:
-    uses: ./.github/workflows/build-reusable.yml
+    uses: ./.github/workflows/build-reusable.yml@main
+    with: 
+      name: myapp
   
 
     
