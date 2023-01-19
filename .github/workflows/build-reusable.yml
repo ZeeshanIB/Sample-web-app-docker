@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: reusable
 on:
   push:
     branches: [ "main" ]
