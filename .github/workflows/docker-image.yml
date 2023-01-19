@@ -1,8 +1,6 @@
 name: Dispatch
 on:
-  repository_dispatch:
-    types: [run-build-reusable]
-
+  workflow_dispatch:
 jobs:
   call-workflow-in-local-repo:
     uses: ./.github/workflows/build-reusable.yml
