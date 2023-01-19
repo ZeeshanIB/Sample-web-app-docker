@@ -32,21 +32,18 @@ jobs:
         
       - name: Launch Postgres container
         run: |
-          docker run -d --name my-postgres -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
-      
-
-      - name: Connect to PostgreSQL
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
-        run: |
-          docker run -d --name my-web-app ${{secrets.DOCKER_USER}}/webapp-docker:v2
+          docker run -d --name postgres -e POSTGRES_USER= "postgres" -e POSTGRES_PASSWORD="postgres" postgres:15-alpine
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          host: my-postgres
-          port: 5432
-          user: postgres
-          password: postgres
-          dbname: postgres
+          host : postgres
+          port : 5432
+          user : postgres
+          password : postgres
+          dbname : postgres
+
+      - name: Launch Web App container
+        run: |
+          docker run -d --name web --link postgres:postgres -p 8000:8000 -e host= ${host} -e port= ${port} -e password= ${password} -e dbname= ${dbname} ${{secrets.DOCKER_USER}}/webapp-docker:v2
 
       
