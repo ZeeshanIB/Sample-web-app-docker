@@ -55,5 +55,4 @@ jobs:
         run: |
           docker run -d --name webapp ${{secrets.DOCKER_USER}}/webapp-docker:v2
 
-      - name: echo
-        run: echo " connected "
+    
