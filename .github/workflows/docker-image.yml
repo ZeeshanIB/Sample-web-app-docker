@@ -4,10 +4,8 @@ on:
     types: [run-build-reusable]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Dispatch event
-      uses: ./.github/workflows/build-reusable.yml
+  call-workflow-in-local-repo:
+    uses: ./.github/workflows/build-reusable.yml
+  
 
     
