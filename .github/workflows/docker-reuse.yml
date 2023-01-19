@@ -14,11 +14,12 @@ jobs:
       run: |
         echo host=${host}, user=${user}, password=${password}, dbname=${dbname} >> app.py
     - name: docker login
+      run: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      #run: |
+       # docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
       run: docker build . --file web-app-docker/Dockerfile --tag zeeshanib/webapp-docker:v2
     - name: Docker Push

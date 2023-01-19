@@ -1,9 +1,6 @@
 name: docker1
 on:
   workflow_dispatch:
-    env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
 jobs:
   call-workflow-in-local-repo:
     uses: ./.github/workflows/docker-reuse.yml
