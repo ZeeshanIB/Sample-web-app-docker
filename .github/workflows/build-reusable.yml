@@ -1,6 +1,10 @@
 name: reusable workflow
 on:
   workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
