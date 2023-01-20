@@ -9,10 +9,10 @@ def index():
     # Connect to the Postgres container
     conn = connect(
      port=5432,
-     host="hostname",
-     user="username",
-     password="password",
-     dbname="database_name"
+     host="post_db2",
+     user="postgres",
+     password="postgres",
+     dbname="postgres"
     )
 
     # Create the table to store IP addresses
