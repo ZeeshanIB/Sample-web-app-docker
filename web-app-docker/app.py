@@ -9,9 +9,9 @@ def index():
     # Connect to the Postgres container
     conn = connect(
      port= 5432,
-     host= "172.17.0.4" ,
+     host= "postgres" ,
      #user="postgres",
-     password="postgres",
+     password="mysecretpassword",
     # dbname="postgres"
     )
 
