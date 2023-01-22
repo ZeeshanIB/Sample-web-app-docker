@@ -8,11 +8,11 @@ app = Flask(__name__)
 def index():
     # Connect to the Postgres container
     conn = connect(
-     port=5432,
-     host="post_db2",
-     user="postgres",
+     port= 5432,
+     host= "172.17.0.4" ,
+     #user="postgres",
      password="postgres",
-     dbname="postgres"
+    # dbname="postgres"
     )
 
     # Create the table to store IP addresses
@@ -24,10 +24,10 @@ def index():
         cur.execute("INSERT INTO ip_addresses (address) VALUES (%s);", (request.remote_addr,))
 
     
-    cur.execute("SELECT * FROM ip_addresses")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+   # cur.execute("SELECT * FROM ip_addresses")
+    #rows = cur.fetchall()
+    #for row in rows:
+     #   print(row)
     conn.commit()
     conn.close()
     return "IP address stored!"

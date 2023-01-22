@@ -1,0 +1,23 @@
+name: link
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Start Postgres container
+      run: docker run -d --name postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 postgres:15-alpine
+
+    - name: Start Web App container
+      run: docker run -d --name webapp --link postgres:postgres -p 8000:8000 ${{secrets.DOCKER_USER}}/webapp-docker:v2
